@@ -55,23 +55,22 @@ def get_due_date(entry):
 
 
 def parse_day_name(day_name):
-    match day_name:
-        case 'M':
-            return 0
-        case 'T':
-            return 1
-        case 'W':
-            return 2
-        case 'Th':
-            return 3
-        case 'F':
-            return 4
-        case 'Sat':
-            return 5
-        case 'Sun':
-            return 6
-        case _:
-            raise ValueError
+    if day_name == 'M':
+        return 0
+    elif day_name == 'T':
+        return 1
+    elif day_name == 'W':
+        return 2
+    elif day_name == 'Th':
+        return 3
+    elif day_name == 'F':
+        return 4
+    elif day_name == 'Sat':
+        return 5
+    elif day_name == 'Sun':
+        return 6
+    else:
+        raise ValueError
 
 
 def days_to_next_day(curr, day):
@@ -95,15 +94,14 @@ def calculate_next_due_date(entry):
         return ldom - timedelta(days=ldom.day)
     else:
         interval = get_recur_interval(entry)
-        match recur_unit:
-            case 'Day':
-                return date + relativedelta(days=interval)
-            case 'Week':
-                return date + relativedelta(weeks=interval)
-            case 'Month':
-                return date + relativedelta(months=interval)
-            case _:
-                return ValueError
+        if recur_unit == 'Day':
+            return date + relativedelta(days=interval)
+        elif recur_unit == 'Week':
+            return date + relativedelta(weeks=interval)
+        elif recur_unit == 'Month':
+            return date + relativedelta(months=interval)
+        else:
+            return ValueError
 
 
 def generate_update_json(new_due_date):
