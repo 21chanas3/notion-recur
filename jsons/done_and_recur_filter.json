@@ -1,0 +1,18 @@
+{
+  "filter": {
+    "and": [
+      {
+        "property": "Status",
+        "status": {
+          "equals": "Done"
+        }
+      },
+      {
+        "property": "Recur Unit",
+        "select": {
+          "is_not_empty": true
+        }
+      }
+    ]
+  }
+}
